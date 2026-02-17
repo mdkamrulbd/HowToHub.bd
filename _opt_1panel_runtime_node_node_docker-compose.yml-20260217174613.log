@@ -1,0 +1,192 @@
+[2Knode  | npm error code ENOENT
+[2Knode  | npm error syscall open
+[2Knode  | npm error path /app/package.json
+[2Knode  | npm error errno -2
+[2Knode  | npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/app/package.json'
+[2Knode  | npm error enoent This is related to npm not being able to find a file.
+[2Knode  | npm error enoent
+[2Knode  | npm error A complete log of this run can be found in: /root/.npm/_logs/2026-02-17T11_45_30_161Z-debug-0.log
+[2Knode  | npm error code ENOENT
+[2Knode  | npm error syscall open
+[2Knode  | npm error path /app/package.json
+[2Knode  | npm error errno -2
+[2Knode  | npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/app/package.json'
+[2Knode  | npm error enoent This is related to npm not being able to find a file.
+[2Knode  | npm error enoent
+[2Knode  | npm error A complete log of this run can be found in: /root/.npm/_logs/2026-02-17T11_45_30_640Z-debug-0.log
+[2Knode  | npm error code ENOENT
+[2Knode  | npm error syscall open
+[2Knode  | npm error path /app/package.json
+[2Knode  | npm error errno -2
+[2Knode  | npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/app/package.json'
+[2Knode  | npm error enoent This is related to npm not being able to find a file.
+[2Knode  | npm error enoent
+[2Knode  | npm error A complete log of this run can be found in: /root/.npm/_logs/2026-02-17T11_45_31_351Z-debug-0.log
+[2Knode  | npm error code ENOENT
+[2Knode  | npm error syscall open
+[2Knode  | npm error path /app/package.json
+[2Knode  | npm error errno -2
+[2Knode  | npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/app/package.json'
+[2Knode  | npm error enoent This is related to npm not being able to find a file.
+[2Knode  | npm error enoent
+[2Knode  | npm error A complete log of this run can be found in: /root/.npm/_logs/2026-02-17T11_45_31_792Z-debug-0.log
+[2Knode  | npm error code ENOENT
+[2Knode  | npm error syscall open
+[2Knode  | npm error path /app/package.json
+[2Knode  | npm error errno -2
+[2Knode  | npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/app/package.json'
+[2Knode  | npm error enoent This is related to npm not being able to find a file.
+[2Knode  | npm error enoent
+[2Knode  | npm error A complete log of this run can be found in: /root/.npm/_logs/2026-02-17T11_45_32_569Z-debug-0.log
+[2Knode  | npm error code ENOENT
+[2Knode  | npm error syscall open
+[2Knode  | npm error path /app/package.json
+[2Knode  | npm error errno -2
+[2Knode  | npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/app/package.json'
+[2Knode  | npm error enoent This is related to npm not being able to find a file.
+[2Knode  | npm error enoent
+[2Knode  | npm error A complete log of this run can be found in: /root/.npm/_logs/2026-02-17T11_45_32_997Z-debug-0.log
+[2Knode  | npm error code ENOENT
+[2Knode  | npm error syscall open
+[2Knode  | npm error path /app/package.json
+[2Knode  | npm error errno -2
+[2Knode  | npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/app/package.json'
+[2Knode  | npm error enoent This is related to npm not being able to find a file.
+[2Knode  | npm error enoent
+[2Knode  | npm error A complete log of this run can be found in: /root/.npm/_logs/2026-02-17T11_45_33_947Z-debug-0.log
+[2Knode  | npm error code ENOENT
+[2Knode  | npm error syscall open
+[2Knode  | npm error path /app/package.json
+[2Knode  | npm error errno -2
+[2Knode  | npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/app/package.json'
+[2Knode  | npm error enoent This is related to npm not being able to find a file.
+[2Knode  | npm error enoent
+[2Knode  | npm error A complete log of this run can be found in: /root/.npm/_logs/2026-02-17T11_45_34_419Z-debug-0.log
+[2Knode  | npm error code ENOENT
+[2Knode  | npm error syscall open
+[2Knode  | npm error path /app/package.json
+[2Knode  | npm error errno -2
+[2Knode  | npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/app/package.json'
+[2Knode  | npm error enoent This is related to npm not being able to find a file.
+[2Knode  | npm error enoent
+[2Knode  | npm error A complete log of this run can be found in: /root/.npm/_logs/2026-02-17T11_45_35_798Z-debug-0.log
+[2Knode  | npm error code ENOENT
+[2Knode  | npm error syscall open
+[2Knode  | npm error path /app/package.json
+[2Knode  | npm error errno -2
+[2Knode  | npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/app/package.json'
+[2Knode  | npm error enoent This is related to npm not being able to find a file.
+[2Knode  | npm error enoent
+[2Knode  | npm error A complete log of this run can be found in: /root/.npm/_logs/2026-02-17T11_45_36_284Z-debug-0.log
+[2Knode  | npm error code ENOENT
+[2Knode  | npm error syscall open
+[2Knode  | npm error path /app/package.json
+[2Knode  | npm error errno -2
+[2Knode  | npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/app/package.json'
+[2Knode  | npm error enoent This is related to npm not being able to find a file.
+[2Knode  | npm error enoent
+[2Knode  | npm error A complete log of this run can be found in: /root/.npm/_logs/2026-02-17T11_45_38_496Z-debug-0.log
+[2Knode  | npm error code ENOENT
+[2Knode  | npm error syscall open
+[2Knode  | npm error path /app/package.json
+[2Knode  | npm error errno -2
+[2Knode  | npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/app/package.json'
+[2Knode  | npm error enoent This is related to npm not being able to find a file.
+[2Knode  | npm error enoent
+[2Knode  | npm error A complete log of this run can be found in: /root/.npm/_logs/2026-02-17T11_45_38_978Z-debug-0.log
+[2Knode  | npm error code ENOENT
+[2Knode  | npm error syscall open
+[2Knode  | npm error path /app/package.json
+[2Knode  | npm error errno -2
+[2Knode  | npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/app/package.json'
+[2Knode  | npm error enoent This is related to npm not being able to find a file.
+[2Knode  | npm error enoent
+[2Knode  | npm error A complete log of this run can be found in: /root/.npm/_logs/2026-02-17T11_45_40_489Z-debug-0.log
+[2Knode  | npm error code ENOENT
+[2Knode  | npm error syscall open
+[2Knode  | npm error path /app/package.json
+[2Knode  | npm error errno -2
+[2Knode  | npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/app/package.json'
+[2Knode  | npm error enoent This is related to npm not being able to find a file.
+[2Knode  | npm error enoent
+[2Knode  | npm error A complete log of this run can be found in: /root/.npm/_logs/2026-02-17T11_45_40_951Z-debug-0.log
+[2Knode  | npm error code ENOENT
+[2Knode  | npm error syscall open
+[2Knode  | npm error path /app/package.json
+[2Knode  | npm error errno -2
+[2Knode  | npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/app/package.json'
+[2Knode  | npm error enoent This is related to npm not being able to find a file.
+[2Knode  | npm error enoent
+[2Knode  | npm error A complete log of this run can be found in: /root/.npm/_logs/2026-02-17T11_45_41_612Z-debug-0.log
+[2Knode  | npm error code ENOENT
+[2Knode  | npm error syscall open
+[2Knode  | npm error path /app/package.json
+[2Knode  | npm error errno -2
+[2Knode  | npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/app/package.json'
+[2Knode  | npm error enoent This is related to npm not being able to find a file.
+[2Knode  | npm error enoent
+[2Knode  | npm error A complete log of this run can be found in: /root/.npm/_logs/2026-02-17T11_45_42_056Z-debug-0.log
+[2Knode  | npm error code ENOENT
+[2Knode  | npm error syscall open
+[2Knode  | npm error path /app/package.json
+[2Knode  | npm error errno -2
+[2Knode  | npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/app/package.json'
+[2Knode  | npm error enoent This is related to npm not being able to find a file.
+[2Knode  | npm error enoent
+[2Knode  | npm error A complete log of this run can be found in: /root/.npm/_logs/2026-02-17T11_45_42_832Z-debug-0.log
+[2Knode  | npm error code ENOENT
+[2Knode  | npm error syscall open
+[2Knode  | npm error path /app/package.json
+[2Knode  | npm error errno -2
+[2Knode  | npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/app/package.json'
+[2Knode  | npm error enoent This is related to npm not being able to find a file.
+[2Knode  | npm error enoent
+[2Knode  | npm error A complete log of this run can be found in: /root/.npm/_logs/2026-02-17T11_45_43_325Z-debug-0.log
+[2Knode  | npm error code ENOENT
+[2Knode  | npm error syscall open
+[2Knode  | npm error path /app/package.json
+[2Knode  | npm error errno -2
+[2Knode  | npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/app/package.json'
+[2Knode  | npm error enoent This is related to npm not being able to find a file.
+[2Knode  | npm error enoent
+[2Knode  | npm error A complete log of this run can be found in: /root/.npm/_logs/2026-02-17T11_45_44_304Z-debug-0.log
+[2Knode  | npm error code ENOENT
+[2Knode  | npm error syscall open
+[2Knode  | npm error path /app/package.json
+[2Knode  | npm error errno -2
+[2Knode  | npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/app/package.json'
+[2Knode  | npm error enoent This is related to npm not being able to find a file.
+[2Knode  | npm error enoent
+[2Knode  | npm error A complete log of this run can be found in: /root/.npm/_logs/2026-02-17T11_45_44_808Z-debug-0.log
+[2Knode  | npm error code ENOENT
+[2Knode  | npm error syscall open
+[2Knode  | npm error path /app/package.json
+[2Knode  | npm error errno -2
+[2Knode  | npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/app/package.json'
+[2Knode  | npm error enoent This is related to npm not being able to find a file.
+[2Knode  | npm error enoent
+[2Knode  | npm error A complete log of this run can be found in: /root/.npm/_logs/2026-02-17T11_45_46_194Z-debug-0.log
+[2Knode  | npm error code ENOENT
+[2Knode  | npm error syscall open
+[2Knode  | npm error path /app/package.json
+[2Knode  | npm error errno -2
+[2Knode  | npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/app/package.json'
+[2Knode  | npm error enoent This is related to npm not being able to find a file.
+[2Knode  | npm error enoent
+[2Knode  | npm error A complete log of this run can be found in: /root/.npm/_logs/2026-02-17T11_45_46_713Z-debug-0.log
+[2Knode  | npm error code ENOENT
+[2Knode  | npm error syscall open
+[2Knode  | npm error path /app/package.json
+[2Knode  | npm error errno -2
+[2Knode  | npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/app/package.json'
+[2Knode  | npm error enoent This is related to npm not being able to find a file.
+[2Knode  | npm error enoent
+[2Knode  | npm error A complete log of this run can be found in: /root/.npm/_logs/2026-02-17T11_45_48_896Z-debug-0.log
+[2Knode  | npm error code ENOENT
+[2Knode  | npm error syscall open
+[2Knode  | npm error path /app/package.json
+[2Knode  | npm error errno -2
+[2Knode  | npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/app/package.json'
+[2Knode  | npm error enoent This is related to npm not being able to find a file.
+[2Knode  | npm error enoent
+[2Knode  | npm error A complete log of this run can be found in: /root/.npm/_logs/2026-02-17T11_45_49_396Z-debug-0.log

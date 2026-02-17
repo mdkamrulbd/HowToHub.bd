@@ -3,8 +3,10 @@
 import { Send } from 'lucide-react'
 import { sendContact } from './actions'
 import { useSearchParams } from 'next/navigation'
+import { Suspense } from 'react' // ১. Suspense ইম্পোর্ট করা হয়েছে
 
-export default function ContactPage() {
+// ২. মূল লজিকটি একটি আলাদা কম্পোনেন্টে (ContactForm) রাখা হলো
+function ContactForm() {
   const searchParams = useSearchParams()
   const success = searchParams?.get('success') === '1'
   const error = searchParams?.get('error')
@@ -115,5 +117,14 @@ export default function ContactPage() {
         )}
       </div>
     </div>
+  )
+}
+
+// ৩. মেইন পেজ কম্পোনেন্টে Suspense দিয়ে র্যাপ করা হয়েছে
+export default function ContactPage() {
+  return (
+    <Suspense fallback={<div className="text-center py-20 text-white">লোড হচ্ছে...</div>}>
+      <ContactForm />
+    </Suspense>
   )
 }
