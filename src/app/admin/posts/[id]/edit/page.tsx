@@ -3,6 +3,7 @@ import { createClient } from '@/utils/supabase/server'
 import { notFound } from 'next/navigation'
 import { ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
+import ConfirmSubmit from '@/components/ConfirmSubmit'
 
 interface EditPostPageProps {
   params: Promise<{
@@ -41,7 +42,7 @@ export default async function EditPostPage({ params }: EditPostPageProps) {
           <p className="mt-1 text-sm text-slate-300">Update your tutorial content.</p>
         </div>
         <div className="border-t border-white/10 px-4 py-5 sm:p-6">
-          <form action={updatePostWithId} className="space-y-6">
+          <form id="post-edit-form" action={updatePostWithId} className="space-y-6">
             <div>
               <label htmlFor="title" className="block text-sm font-medium text-slate-200">
                 Title
@@ -181,12 +182,15 @@ export default async function EditPostPage({ params }: EditPostPageProps) {
               >
                 Cancel
               </Link>
-              <button
-                type="submit"
+              <ConfirmSubmit
+                formId="post-edit-form"
+                label="Update Post"
+                confirmTitle="আপডেট নিশ্চিত?"
+                confirmMessage="এই পোস্টের পরিবর্তনগুলো সেভ করতে চান?"
+                confirmLabel="হ্যাঁ, আপডেট করুন"
+                cancelLabel="বাতিল"
                 className="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-indigo-500 via-sky-500 to-fuchsia-500 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-indigo-500/30 hover:opacity-90 transition"
-              >
-                Update Post
-              </button>
+              />
             </div>
           </form>
         </div>

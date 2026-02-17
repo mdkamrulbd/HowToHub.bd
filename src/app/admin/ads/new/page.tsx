@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 import { createAd } from '../actions'
 import MultiSelect from '@/components/MultiSelect'
+import ConfirmSubmit from '@/components/ConfirmSubmit'
 import { useState } from 'react'
 
 const placements = [
@@ -45,7 +46,7 @@ export default function NewAdPage() {
           <p className="mt-1 text-sm text-slate-300">Configure placements and visuals for your ads.</p>
         </div>
         <div className="border-t border-white/10 px-4 py-5 sm:p-6">
-          <form action={createAd} className="space-y-6">
+          <form id="ad-new-form" action={createAd} className="space-y-6">
             <div>
               <label htmlFor="title" className="block text-sm font-medium text-slate-200">
                 Title
@@ -195,12 +196,15 @@ export default function NewAdPage() {
               >
                 Cancel
               </Link>
-              <button
-                type="submit"
+              <ConfirmSubmit
+                formId="ad-new-form"
+                label="Save Ad"
+                confirmTitle="সেভ নিশ্চিত?"
+                confirmMessage="এই বিজ্ঞাপনটি সেভ করতে চান?"
+                confirmLabel="হ্যাঁ, সেভ করুন"
+                cancelLabel="বাতিল"
                 className="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-indigo-500 via-sky-500 to-fuchsia-500 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-indigo-500/30 hover:opacity-90 transition"
-              >
-                Save Ad
-              </button>
+              />
             </div>
           </form>
         </div>

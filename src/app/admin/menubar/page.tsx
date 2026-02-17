@@ -1,6 +1,7 @@
 import { createClient } from '@/utils/supabase/server'
 import Link from 'next/link'
-import { Plus, Edit, Trash2, ChevronRight } from 'lucide-react'
+import { Edit, Trash2, ChevronRight, Plus } from 'lucide-react'
+import ConfirmSubmit from '@/components/ConfirmSubmit'
 import { deleteMenuItemAction, createMenuItem } from './actions'
 
 export const revalidate = 0
@@ -81,12 +82,22 @@ export default async function MenuBarPage() {
                           <Edit className="h-4 w-4 mr-1" />
                           Edit
                         </Link>
-                        <form action={deleteMenuItemAction}>
+                        <form id={`delete-form-parent-${parent.id}`} action={deleteMenuItemAction}>
                           <input type="hidden" name="id" value={parent.id} />
-                          <button className="inline-flex items-center text-sm font-medium text-rose-300 hover:text-rose-200">
-                            <Trash2 className="h-4 w-4 mr-1" />
-                            Delete
-                          </button>
+                          <ConfirmSubmit
+                            formId={`delete-form-parent-${parent.id}`}
+                            label={(
+                              <span className="inline-flex items-center">
+                                <Trash2 className="h-4 w-4 mr-1" />
+                                Delete
+                              </span>
+                            ) as unknown as string}
+                            confirmTitle="ডিলিট নিশ্চিত?"
+                            confirmMessage="এই মেনু আইটেমটি ডিলিট করতে চান?"
+                            confirmLabel="হ্যাঁ, ডিলিট করুন"
+                            cancelLabel="বাতিল"
+                            className="inline-flex items-center text-sm font-medium text-rose-300 hover:text-rose-200"
+                          />
                         </form>
                       </div>
                     </div>
@@ -107,12 +118,22 @@ export default async function MenuBarPage() {
                                   <Edit className="h-4 w-4 mr-1" />
                                   Edit
                                 </Link>
-                                <form action={deleteMenuItemAction}>
+                                <form id={`delete-form-${child.id}`} action={deleteMenuItemAction}>
                                   <input type="hidden" name="id" value={child.id} />
-                                  <button className="inline-flex items-center text-sm font-medium text-rose-300 hover:text-rose-200">
-                                    <Trash2 className="h-4 w-4 mr-1" />
-                                    Delete
-                                  </button>
+                                  <ConfirmSubmit
+                                    formId={`delete-form-${child.id}`}
+                                    label={(
+                                      <span className="inline-flex items-center">
+                                        <Trash2 className="h-4 w-4 mr-1" />
+                                        Delete
+                                      </span>
+                                    ) as unknown as string}
+                                    confirmTitle="ডিলিট নিশ্চিত?"
+                                    confirmMessage="এই মেনু আইটেমটি ডিলিট করতে চান?"
+                                    confirmLabel="হ্যাঁ, ডিলিট করুন"
+                                    cancelLabel="বাতিল"
+                                    className="inline-flex items-center text-sm font-medium text-rose-300 hover:text-rose-200"
+                                  />
                                 </form>
                               </div>
                             </li>
@@ -133,7 +154,7 @@ export default async function MenuBarPage() {
       <div className="space-y-6" id="new">
         <div className="surface rounded-2xl p-5">
           <div className="text-slate-200 text-sm font-semibold mb-3">New Menu Item</div>
-          <form action={createMenuItem} className="space-y-4">
+          <form id="menubar-new-form" action={createMenuItem} className="space-y-4">
             <div>
               <label htmlFor="label" className="block text-sm font-medium text-slate-200">Label</label>
               <input
@@ -190,12 +211,15 @@ export default async function MenuBarPage() {
               <label htmlFor="enabled" className="text-sm font-medium text-slate-200">Enabled</label>
             </div>
             <div className="pt-2 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
-              <button
-                type="submit"
+              <ConfirmSubmit
+                formId="menubar-new-form"
+                label="Save Item"
+                confirmTitle="সেভ নিশ্চিত?"
+                confirmMessage="নতুন মেনু আইটেমটি সেভ করতে চান?"
+                confirmLabel="হ্যাঁ, সেভ করুন"
+                cancelLabel="বাতিল"
                 className="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-indigo-500 via-sky-500 to-fuchsia-500 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-indigo-500/30 hover:opacity-90 transition"
-              >
-                Save Item
-              </button>
+              />
             </div>
           </form>
         </div>

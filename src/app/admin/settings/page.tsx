@@ -3,6 +3,7 @@
 import { useActionState } from 'react'
 import { createManager } from './actions'
 import { UserPlus, Loader2, CheckCircle2, AlertCircle } from 'lucide-react'
+import ConfirmSubmit from '@/components/ConfirmSubmit'
 
 const initialState = {
   success: false,
@@ -22,7 +23,7 @@ export default function SettingsPage() {
         <div className="border-t border-white/10 px-4 py-5 sm:p-6">
           <div className="max-w-md">
             <h4 className="text-base font-medium text-white mb-4">নতুন ম্যানেজার তৈরি করুন</h4>
-            <form action={formAction} className="space-y-4">
+            <form id="settings-manager-form" action={formAction} className="space-y-4">
               <div>
                 <label htmlFor="email" className="block text-sm font-medium text-slate-200">
                   ইমেইল
@@ -51,23 +52,28 @@ export default function SettingsPage() {
                 />
               </div>
 
-              <button
-                type="submit"
+              <ConfirmSubmit
+                formId="settings-manager-form"
                 disabled={isPending}
+                label={
+                  isPending ? (
+                    <>
+                      <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                      তৈরি হচ্ছে...
+                    </>
+                  ) : (
+                    <>
+                      <UserPlus className="h-4 w-4 mr-2" />
+                      ম্যানেজার যুক্ত করুন
+                    </>
+                  )
+                }
+                confirmTitle="একাউন্ট তৈরি নিশ্চিত?"
+                confirmMessage="নতুন ম্যানেজার একাউন্ট তৈরি করবেন?"
+                confirmLabel="হ্যাঁ, তৈরি করুন"
+                cancelLabel="বাতিল"
                 className="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-indigo-500 via-sky-500 to-fuchsia-500 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-indigo-500/30 hover:opacity-90 transition disabled:opacity-70"
-              >
-                {isPending ? (
-                  <>
-                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                    তৈরি হচ্ছে...
-                  </>
-                ) : (
-                  <>
-                    <UserPlus className="h-4 w-4 mr-2" />
-                    ম্যানেজার যুক্ত করুন
-                  </>
-                )}
-              </button>
+              />
 
               {state.message && (
                 <div className={`mt-3 flex items-center gap-2 text-sm ${state.success ? 'text-emerald-300' : 'text-rose-300'}`}>
