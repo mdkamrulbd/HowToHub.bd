@@ -65,7 +65,7 @@ export default function PostsListClient({
           </div>
           <Link
             href="/admin/posts/new"
-            className="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-indigo-500 via-sky-500 to-fuchsia-500 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-indigo-500/30 hover:opacity-90 transition sm:w-auto"
+            className="inline-flex w-full items-center justify-center rounded-xl bg-gradient-to-r from-indigo-500 via-sky-500 to-fuchsia-500 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-indigo-500/30 hover:opacity-90 transition sm:w-auto"
           >
             <Plus className="h-4 w-4 mr-2" />
             New Post
@@ -82,8 +82,8 @@ export default function PostsListClient({
                         {index + 1}
                       </span>
                       <div className="overflow-hidden">
-                        <p className="text-sm font-semibold text-white truncate">{post.title}</p>
-                        <p className="mt-2 text-xs text-slate-400 truncate">
+                        <p className="text-sm font-semibold text-white break-words sm:truncate">{post.title}</p>
+                        <p className="mt-2 text-xs text-slate-400 break-words sm:truncate">
                           {post.createdLabel}
                         </p>
                         <div className="mt-3 sm:hidden">
@@ -110,17 +110,17 @@ export default function PostsListClient({
                         </span>
                       )}
                     </div>
-                    <div className="flex-shrink-0 flex flex-wrap items-center gap-3 sm:justify-self-end">
+                    <div className="flex-shrink-0 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-self-end">
                       <Link
                         href={`/admin/posts/${post.id}/edit`}
-                        className="inline-flex items-center text-sm font-medium text-sky-300 hover:text-sky-200"
+                        className="inline-flex w-full items-center justify-center text-sm font-medium text-sky-300 hover:text-sky-200 sm:w-auto sm:justify-start"
                       >
                         <Edit className="h-4 w-4 mr-1" />
                         Edit
                       </Link>
                       <button
                         onClick={() => setDeleteId(post.id)}
-                        className="inline-flex items-center text-sm font-medium text-rose-300 hover:text-rose-200"
+                        className="inline-flex w-full items-center justify-center text-sm font-medium text-rose-300 hover:text-rose-200 sm:w-auto sm:justify-start"
                       >
                         <Trash2 className="h-4 w-4 mr-1" />
                         Delete
