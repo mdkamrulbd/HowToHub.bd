@@ -1,9 +1,12 @@
 import { readHomeContent } from '@/utils/homeContentStore'
 import { updateHomeContent } from './actions'
-import { Save } from 'lucide-react'
 import ConfirmSubmit from '@/components/ConfirmSubmit'
 
-export default async function HomeContentPage() {
+export default async function HomeContentPage({
+  searchParams,
+}: {
+  searchParams?: { success?: string; error?: string }
+}) {
   const contentData = await readHomeContent()
 
   const defaultContent = {
@@ -68,15 +71,30 @@ export default async function HomeContentPage() {
     <div className="max-w-5xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
       <div className="surface rounded-2xl overflow-hidden">
         <div className="px-4 py-5 sm:px-6">
-          <h3 className="text-lg font-semibold text-white">Home Content</h3>
-          <p className="mt-1 text-sm text-slate-300">হোম পেইজের সকল স্ট্যাটিক কনটেন্ট আপডেট করুন।</p>
+          <h3 className="text-lg font-semibold text-white">হোম কনটেন্ট</h3>
+          <p className="mt-1 text-sm text-slate-300">হোমপেজের প্রতিটি সেকশনের লেখা ও লিংক এখানে আপডেট করুন।</p>
         </div>
+        {(searchParams?.success === '1' || searchParams?.error) && (
+          <div className="px-4 sm:px-6">
+            <div
+              className={`rounded-xl border px-4 py-3 text-sm ${
+                searchParams?.success === '1'
+                  ? 'border-emerald-500/40 bg-emerald-500/10 text-emerald-200'
+                  : 'border-red-500/40 bg-red-500/10 text-red-200'
+              }`}
+            >
+              {searchParams?.success === '1'
+                ? 'হোম কনটেন্ট সফলভাবে আপডেট হয়েছে।'
+                : searchParams?.error}
+            </div>
+          </div>
+        )}
         <div className="border-t border-white/10 px-4 py-5 sm:p-6">
           <form id="home-content-form" action={updateHomeContent} className="space-y-8">
             <div className="space-y-4">
-              <h4 className="text-base font-semibold text-white">Hero</h4>
+              <h4 className="text-base font-semibold text-white">হিরো সেকশন</h4>
               <div>
-                <label htmlFor="hero_badge" className="block text-sm font-medium text-slate-200">Badge</label>
+                <label htmlFor="hero_badge" className="block text-sm font-medium text-slate-200">ব্যাজ</label>
                 <input
                   id="hero_badge"
                   name="hero_badge"
@@ -86,7 +104,7 @@ export default async function HomeContentPage() {
               </div>
               <div className="grid gap-4 md:grid-cols-3">
                 <div>
-                  <label htmlFor="hero_title_prefix" className="block text-sm font-medium text-slate-200">Title Prefix</label>
+                  <label htmlFor="hero_title_prefix" className="block text-sm font-medium text-slate-200">শিরোনাম (শুরু)</label>
                   <input
                     id="hero_title_prefix"
                     name="hero_title_prefix"
@@ -95,7 +113,7 @@ export default async function HomeContentPage() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="hero_title_accent" className="block text-sm font-medium text-slate-200">Title Accent</label>
+                  <label htmlFor="hero_title_accent" className="block text-sm font-medium text-slate-200">শিরোনাম (হাইলাইট)</label>
                   <input
                     id="hero_title_accent"
                     name="hero_title_accent"
@@ -104,7 +122,7 @@ export default async function HomeContentPage() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="hero_title_suffix" className="block text-sm font-medium text-slate-200">Title Suffix</label>
+                  <label htmlFor="hero_title_suffix" className="block text-sm font-medium text-slate-200">শিরোনাম (শেষ)</label>
                   <input
                     id="hero_title_suffix"
                     name="hero_title_suffix"
@@ -114,7 +132,7 @@ export default async function HomeContentPage() {
                 </div>
               </div>
               <div>
-                <label htmlFor="hero_description" className="block text-sm font-medium text-slate-200">Description</label>
+                <label htmlFor="hero_description" className="block text-sm font-medium text-slate-200">বর্ণনা</label>
                 <textarea
                   id="hero_description"
                   name="hero_description"
@@ -125,7 +143,7 @@ export default async function HomeContentPage() {
               </div>
               <div className="grid gap-4 md:grid-cols-2">
                 <div>
-                  <label htmlFor="primary_cta_label" className="block text-sm font-medium text-slate-200">Primary CTA Label</label>
+                  <label htmlFor="primary_cta_label" className="block text-sm font-medium text-slate-200">প্রাইমারি বাটন টেক্সট</label>
                   <input
                     id="primary_cta_label"
                     name="primary_cta_label"
@@ -134,7 +152,7 @@ export default async function HomeContentPage() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="primary_cta_href" className="block text-sm font-medium text-slate-200">Primary CTA Link</label>
+                  <label htmlFor="primary_cta_href" className="block text-sm font-medium text-slate-200">প্রাইমারি বাটন লিংক</label>
                   <input
                     id="primary_cta_href"
                     name="primary_cta_href"
@@ -143,7 +161,7 @@ export default async function HomeContentPage() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="secondary_cta_label" className="block text-sm font-medium text-slate-200">Secondary CTA Label</label>
+                  <label htmlFor="secondary_cta_label" className="block text-sm font-medium text-slate-200">সেকেন্ডারি বাটন টেক্সট</label>
                   <input
                     id="secondary_cta_label"
                     name="secondary_cta_label"
@@ -152,7 +170,7 @@ export default async function HomeContentPage() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="secondary_cta_href" className="block text-sm font-medium text-slate-200">Secondary CTA Link</label>
+                  <label htmlFor="secondary_cta_href" className="block text-sm font-medium text-slate-200">সেকেন্ডারি বাটন লিংক</label>
                   <input
                     id="secondary_cta_href"
                     name="secondary_cta_href"
@@ -164,10 +182,10 @@ export default async function HomeContentPage() {
             </div>
 
             <div className="space-y-4">
-              <h4 className="text-base font-semibold text-white">Feature Panel</h4>
+              <h4 className="text-base font-semibold text-white">ফিচার সেকশন</h4>
               <div className="grid gap-4 md:grid-cols-2">
                 <div>
-                  <label htmlFor="feature_panel_title" className="block text-sm font-medium text-slate-200">Panel Title</label>
+                  <label htmlFor="feature_panel_title" className="block text-sm font-medium text-slate-200">সেকশন শিরোনাম</label>
                   <input
                     id="feature_panel_title"
                     name="feature_panel_title"
@@ -176,7 +194,7 @@ export default async function HomeContentPage() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="feature_panel_badge" className="block text-sm font-medium text-slate-200">Panel Badge</label>
+                  <label htmlFor="feature_panel_badge" className="block text-sm font-medium text-slate-200">সেকশন ব্যাজ</label>
                   <input
                     id="feature_panel_badge"
                     name="feature_panel_badge"
@@ -187,7 +205,7 @@ export default async function HomeContentPage() {
               </div>
               <div className="grid gap-4 md:grid-cols-2">
                 <div>
-                  <label htmlFor="feature_one_title" className="block text-sm font-medium text-slate-200">Feature One Title</label>
+                  <label htmlFor="feature_one_title" className="block text-sm font-medium text-slate-200">ফিচার ১ শিরোনাম</label>
                   <input
                     id="feature_one_title"
                     name="feature_one_title"
@@ -196,7 +214,7 @@ export default async function HomeContentPage() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="feature_one_description" className="block text-sm font-medium text-slate-200">Feature One Description</label>
+                  <label htmlFor="feature_one_description" className="block text-sm font-medium text-slate-200">ফিচার ১ বর্ণনা</label>
                   <input
                     id="feature_one_description"
                     name="feature_one_description"
@@ -205,7 +223,7 @@ export default async function HomeContentPage() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="feature_two_title" className="block text-sm font-medium text-slate-200">Feature Two Title</label>
+                  <label htmlFor="feature_two_title" className="block text-sm font-medium text-slate-200">ফিচার ২ শিরোনাম</label>
                   <input
                     id="feature_two_title"
                     name="feature_two_title"
@@ -214,7 +232,7 @@ export default async function HomeContentPage() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="feature_two_description" className="block text-sm font-medium text-slate-200">Feature Two Description</label>
+                  <label htmlFor="feature_two_description" className="block text-sm font-medium text-slate-200">ফিচার ২ বর্ণনা</label>
                   <input
                     id="feature_two_description"
                     name="feature_two_description"
@@ -223,7 +241,7 @@ export default async function HomeContentPage() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="feature_three_title" className="block text-sm font-medium text-slate-200">Feature Three Title</label>
+                  <label htmlFor="feature_three_title" className="block text-sm font-medium text-slate-200">ফিচার ৩ শিরোনাম</label>
                   <input
                     id="feature_three_title"
                     name="feature_three_title"
@@ -232,7 +250,7 @@ export default async function HomeContentPage() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="feature_three_description" className="block text-sm font-medium text-slate-200">Feature Three Description</label>
+                  <label htmlFor="feature_three_description" className="block text-sm font-medium text-slate-200">ফিচার ৩ বর্ণনা</label>
                   <input
                     id="feature_three_description"
                     name="feature_three_description"
@@ -244,23 +262,24 @@ export default async function HomeContentPage() {
             </div>
 
             <div className="space-y-4">
-              <h4 className="text-base font-semibold text-white">Categories</h4>
+              <h4 className="text-base font-semibold text-white">ক্যাটাগরি</h4>
               <div>
-                <label htmlFor="categories" className="block text-sm font-medium text-slate-200">Comma separated</label>
+                <label htmlFor="categories" className="block text-sm font-medium text-slate-200">কমা দিয়ে আলাদা করুন</label>
                 <input
                   id="categories"
                   name="categories"
                   defaultValue={categoriesValue}
                   className="mt-1 w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder-slate-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/40"
                 />
+                <p className="mt-2 text-sm text-slate-400">উদাহরণ: টেক, টিপস, ভিডিও</p>
               </div>
             </div>
 
             <div className="space-y-4">
-              <h4 className="text-base font-semibold text-white">Section Titles</h4>
+              <h4 className="text-base font-semibold text-white">পিনড/জনপ্রিয় সেকশন</h4>
               <div className="grid gap-4 md:grid-cols-2">
                 <div>
-                  <label htmlFor="pinned_section_title" className="block text-sm font-medium text-slate-200">Pinned Section Title</label>
+                  <label htmlFor="pinned_section_title" className="block text-sm font-medium text-slate-200">পিনড শিরোনাম</label>
                   <input
                     id="pinned_section_title"
                     name="pinned_section_title"
@@ -269,7 +288,7 @@ export default async function HomeContentPage() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="trending_section_title" className="block text-sm font-medium text-slate-200">Trending Section Title</label>
+                  <label htmlFor="trending_section_title" className="block text-sm font-medium text-slate-200">জনপ্রিয় শিরোনাম</label>
                   <input
                     id="trending_section_title"
                     name="trending_section_title"
@@ -281,9 +300,9 @@ export default async function HomeContentPage() {
             </div>
 
             <div className="space-y-4">
-              <h4 className="text-base font-semibold text-white">Tutorials Section</h4>
+              <h4 className="text-base font-semibold text-white">টিউটোরিয়াল সেকশন</h4>
               <div>
-                <label htmlFor="tutorials_title" className="block text-sm font-medium text-slate-200">Title</label>
+                <label htmlFor="tutorials_title" className="block text-sm font-medium text-slate-200">শিরোনাম</label>
                 <input
                   id="tutorials_title"
                   name="tutorials_title"
@@ -292,7 +311,7 @@ export default async function HomeContentPage() {
                 />
               </div>
               <div>
-                <label htmlFor="tutorials_subtitle" className="block text-sm font-medium text-slate-200">Subtitle</label>
+                <label htmlFor="tutorials_subtitle" className="block text-sm font-medium text-slate-200">সাবটাইটেল</label>
                 <input
                   id="tutorials_subtitle"
                   name="tutorials_subtitle"
@@ -301,7 +320,7 @@ export default async function HomeContentPage() {
                 />
               </div>
               <div>
-                <label htmlFor="tutorials_search_placeholder" className="block text-sm font-medium text-slate-200">Search Placeholder</label>
+                <label htmlFor="tutorials_search_placeholder" className="block text-sm font-medium text-slate-200">সার্চ প্লেসহোল্ডার</label>
                 <input
                   id="tutorials_search_placeholder"
                   name="tutorials_search_placeholder"
@@ -310,7 +329,7 @@ export default async function HomeContentPage() {
                 />
               </div>
               <div>
-                <label htmlFor="empty_posts_message" className="block text-sm font-medium text-slate-200">Empty State Message</label>
+                <label htmlFor="empty_posts_message" className="block text-sm font-medium text-slate-200">খালি অবস্থার বার্তা</label>
                 <input
                   id="empty_posts_message"
                   name="empty_posts_message"
@@ -321,9 +340,9 @@ export default async function HomeContentPage() {
             </div>
 
             <div className="space-y-4">
-              <h4 className="text-base font-semibold text-white">Subscribe Banner</h4>
+              <h4 className="text-base font-semibold text-white">সাবস্ক্রাইব সেকশন</h4>
               <div>
-                <label htmlFor="subscribe_title" className="block text-sm font-medium text-slate-200">Title</label>
+                <label htmlFor="subscribe_title" className="block text-sm font-medium text-slate-200">শিরোনাম</label>
                 <input
                   id="subscribe_title"
                   name="subscribe_title"
@@ -332,7 +351,7 @@ export default async function HomeContentPage() {
                 />
               </div>
               <div>
-                <label htmlFor="subscribe_subtitle" className="block text-sm font-medium text-slate-200">Subtitle</label>
+                <label htmlFor="subscribe_subtitle" className="block text-sm font-medium text-slate-200">সাবটাইটেল</label>
                 <textarea
                   id="subscribe_subtitle"
                   name="subscribe_subtitle"
@@ -344,9 +363,9 @@ export default async function HomeContentPage() {
             </div>
 
             <div className="space-y-4">
-              <h4 className="text-base font-semibold text-white">Quick Links</h4>
+              <h4 className="text-base font-semibold text-white">ফুটার কুইক লিংক</h4>
               <div>
-                <label htmlFor="quick_links" className="block text-sm font-medium text-slate-200">One per line (label|href)</label>
+                <label htmlFor="quick_links" className="block text-sm font-medium text-slate-200">প্রতি লাইনে (টেক্সট|লিংক)</label>
                 <textarea
                   id="quick_links"
                   name="quick_links"
@@ -355,14 +374,15 @@ export default async function HomeContentPage() {
                   className="mt-1 w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder-slate-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/40"
                   placeholder="হোম|/\nসব টিউটোরিয়াল|/#tutorials"
                 />
+                <p className="mt-2 text-sm text-slate-400">উদাহরণ: যোগাযোগ|/contact</p>
               </div>
             </div>
 
             <div className="space-y-4">
-              <h4 className="text-base font-semibold text-white">Social Links</h4>
+              <h4 className="text-base font-semibold text-white">সোশ্যাল লিংক</h4>
               <div className="grid gap-4 md:grid-cols-2">
                 <div>
-                  <label htmlFor="social_facebook" className="block text-sm font-medium text-slate-200">Facebook</label>
+                  <label htmlFor="social_facebook" className="block text-sm font-medium text-slate-200">ফেসবুক</label>
                   <input
                     id="social_facebook"
                     name="social_facebook"
@@ -371,7 +391,7 @@ export default async function HomeContentPage() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="social_youtube" className="block text-sm font-medium text-slate-200">YouTube</label>
+                  <label htmlFor="social_youtube" className="block text-sm font-medium text-slate-200">ইউটিউব</label>
                   <input
                     id="social_youtube"
                     name="social_youtube"
@@ -380,7 +400,7 @@ export default async function HomeContentPage() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="social_x" className="block text-sm font-medium text-slate-200">X</label>
+                  <label htmlFor="social_x" className="block text-sm font-medium text-slate-200">এক্স</label>
                   <input
                     id="social_x"
                     name="social_x"
@@ -389,7 +409,7 @@ export default async function HomeContentPage() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="social_instagram" className="block text-sm font-medium text-slate-200">Instagram</label>
+                  <label htmlFor="social_instagram" className="block text-sm font-medium text-slate-200">ইনস্টাগ্রাম</label>
                   <input
                     id="social_instagram"
                     name="social_instagram"
@@ -401,9 +421,9 @@ export default async function HomeContentPage() {
             </div>
 
             <div className="space-y-4">
-              <h4 className="text-base font-semibold text-white">Footer</h4>
+              <h4 className="text-base font-semibold text-white">ফুটার</h4>
               <div>
-                <label htmlFor="footer_title" className="block text-sm font-medium text-slate-200">Title</label>
+                <label htmlFor="footer_title" className="block text-sm font-medium text-slate-200">শিরোনাম</label>
                 <input
                   id="footer_title"
                   name="footer_title"
@@ -412,7 +432,7 @@ export default async function HomeContentPage() {
                 />
               </div>
               <div>
-                <label htmlFor="footer_description" className="block text-sm font-medium text-slate-200">Description</label>
+                <label htmlFor="footer_description" className="block text-sm font-medium text-slate-200">বর্ণনা</label>
                 <textarea
                   id="footer_description"
                   name="footer_description"
@@ -423,7 +443,7 @@ export default async function HomeContentPage() {
               </div>
               <div className="grid gap-4 md:grid-cols-2">
                 <div>
-                  <label htmlFor="footer_email" className="block text-sm font-medium text-slate-200">Contact Email</label>
+                  <label htmlFor="footer_email" className="block text-sm font-medium text-slate-200">ইমেইল</label>
                   <input
                     id="footer_email"
                     name="footer_email"
@@ -433,7 +453,7 @@ export default async function HomeContentPage() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="footer_address" className="block text-sm font-medium text-slate-200">Address</label>
+                  <label htmlFor="footer_address" className="block text-sm font-medium text-slate-200">ঠিকানা</label>
                   <input
                     id="footer_address"
                     name="footer_address"
@@ -443,7 +463,7 @@ export default async function HomeContentPage() {
                 </div>
               </div>
               <div>
-                <label htmlFor="footer_credit" className="block text-sm font-medium text-slate-200">Credit Line</label>
+                <label htmlFor="footer_credit" className="block text-sm font-medium text-slate-200">ক্রেডিট লাইন</label>
                 <input
                   id="footer_credit"
                   name="footer_credit"
@@ -456,7 +476,7 @@ export default async function HomeContentPage() {
             <div className="flex justify-end">
               <ConfirmSubmit
                 formId="home-content-form"
-                label="Save Changes"
+                label="সেভ করুন"
                 confirmTitle="পরিবর্তন নিশ্চিত?"
                 confirmMessage="এই পরিবর্তনগুলো সেভ করতে চান?"
                 confirmLabel="হ্যাঁ, সেভ করুন"
