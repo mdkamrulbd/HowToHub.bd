@@ -90,9 +90,6 @@ export default async function PostPage({ params }: PostPageProps) {
   })
 
   const youtubeId = post.video_url ? getYoutubeId(post.video_url) : null
-  const plainText = post.content.replace(/<[^>]*>/g, '').replace(/[#*_`]/g, '')
-  const wordCount = plainText.split(/\s+/).filter(Boolean).length
-  const readTime = Math.max(1, Math.round(wordCount / 180))
   const heroImage = post.thumbnail_url?.trim()
     ? post.thumbnail_url.trim()
     : `https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Modern%20learning%20lab%20neon%20gradient%20desk&image_size=landscape_16_9`
@@ -110,7 +107,7 @@ export default async function PostPage({ params }: PostPageProps) {
         </div>
 
         <div className="surface-strong rounded-3xl overflow-hidden shadow-2xl shadow-indigo-500/10">
-          <div className="relative h-72 w-full">
+          <div className="relative h-56 sm:h-64 w-full">
             <Image
               src={heroImage}
               alt={post.title}
@@ -121,19 +118,18 @@ export default async function PostPage({ params }: PostPageProps) {
             />
             <div className="absolute inset-0 bg-gradient-to-r from-slate-950/80 via-slate-900/40 to-transparent" />
             <div className="absolute inset-0 flex items-end">
-              <div className="px-6 sm:px-10 pb-10 w-full">
+              <div className="px-6 sm:px-10 pb-6 sm:pb-10 w-full">
                 <div className="flex flex-wrap items-center gap-3 text-sm text-slate-200">
                   <span className="chip px-3 py-1 rounded-full text-xs font-semibold">টিউটোরিয়াল</span>
                   <span className="flex items-center gap-1">
                     <Calendar className="h-4 w-4" />
                     {formattedDate}
                   </span>
-                  <span>{readTime.toLocaleString('bn-BD')} মিনিট পড়া</span>
                   <div className="ml-auto">
                     <ShareButton title={post.title} url={postUrl} />
                   </div>
                 </div>
-                <h1 className="mt-4 text-3xl sm:text-5xl font-extrabold text-white leading-tight">
+                <h1 className="mt-4 text-xl sm:text-2xl lg:text-3xl font-extrabold text-white leading-tight">
                   {post.title}
                 </h1>
               </div>

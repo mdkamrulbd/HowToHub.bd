@@ -18,7 +18,7 @@ export default async function AdminLayout({
   }
 
   return (
-    <div className="min-h-screen page-bg">
+    <div className="min-h-screen page-bg overflow-x-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div className="flex flex-col gap-6 md:flex-row md:items-start">
           <aside className="surface-strong rounded-2xl border border-white/10 p-5 md:w-64 md:sticky md:top-20 md:self-start">
@@ -117,7 +117,7 @@ export default async function AdminLayout({
             </form>
           </aside>
 
-          <main className="flex-1">{children}</main>
+          <main className="flex-1 min-w-0">{children}</main>
         </div>
       </div>
     </div>

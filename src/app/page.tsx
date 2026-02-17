@@ -190,8 +190,8 @@ export default async function Home({
 
   const content = {
     ...defaultContent,
-    ...(contentData ?? {}),
     ...(fileContent ?? {}),
+    ...(contentData ?? {}),
   }
   
   const normalizeUrl = (url?: string | null) => {
@@ -222,7 +222,8 @@ export default async function Home({
               <div>{content.hero_badge}</div>
             </div>
             <h1 className="mt-5 text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight">
-              {content.hero_title_prefix} <span className="text-gradient">{content.hero_title_accent}</span>{content.hero_title_suffix}
+              {content.hero_title_prefix} <span className="text-gradient">{content.hero_title_accent}</span>
+              {content.hero_title_suffix ? ` ${content.hero_title_suffix}` : ''}
             </h1>
             <div className="mt-5 text-lg text-slate-200 max-w-xl">
               {content.hero_description}

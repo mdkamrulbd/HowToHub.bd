@@ -38,8 +38,7 @@ export default async function HomeContentPage({
     subscribe_subtitle: 'মাত্র একটি ইমেইলে এক্সক্লুসিভ টিপস, নতুন ভিডিও আর স্পেশাল গাইড—সবার আগে আপনার ইনবক্সে।',
     footer_title: 'HowToHub.bd',
     footer_description: 'বাংলাদেশের জন্য ফ্রি ও মানসম্মত ডিজিটাল শিক্ষা। আমাদের কমিউনিটিতে যোগ দিন, আজই নতুন স্কিল শিখুন।',
-    footer_email: 'contact@howtohub.bd',
-    footer_address: 'ঢাকা, বাংলাদেশ',
+    footer_websites: ['www.zzt.com.bd', 'www.eTender.bd', 'www.zmart.bd'],
     footer_credit: 'HowToHub.bd. সর্বস্বত্ব সংরক্ষিত।',
     social_links: {
       facebook: 'https://facebook.com',
@@ -61,7 +60,7 @@ export default async function HomeContentPage({
     { label: 'হোম', href: '/' },
     { label: 'সব টিউটোরিয়াল', href: '/#tutorials' },
     { label: 'আমাদের সম্পর্কে', href: '/about' },
-    { label: 'যোগাযোগ', href: '/contact' },
+    { label: 'সহায়তা কেন্দ্র', href: '/contact' },
   ]
   const quickLinksValue = Array.isArray(content.quick_links) && content.quick_links.length > 0
     ? content.quick_links.map((l) => `${(l as {label: string; href: string}).label}|${(l as {label: string; href: string}).href}`).join('\n')
@@ -443,21 +442,16 @@ export default async function HomeContentPage({
               </div>
               <div className="grid gap-4 md:grid-cols-2">
                 <div>
-                  <label htmlFor="footer_email" className="block text-sm font-medium text-slate-200">ইমেইল</label>
-                  <input
-                    id="footer_email"
-                    name="footer_email"
-                    type="email"
-                    defaultValue={content.footer_email ?? ''}
-                    className="mt-1 w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder-slate-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/40"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="footer_address" className="block text-sm font-medium text-slate-200">ঠিকানা</label>
-                  <input
-                    id="footer_address"
-                    name="footer_address"
-                    defaultValue={content.footer_address ?? ''}
+                  <label htmlFor="footer_websites" className="block text-sm font-medium text-slate-200">ওয়েবসাইট</label>
+                  <textarea
+                    id="footer_websites"
+                    name="footer_websites"
+                    rows={3}
+                    defaultValue={
+                      Array.isArray(content.footer_websites) && content.footer_websites.length > 0
+                        ? content.footer_websites.join('\n')
+                        : 'www.zzt.com.bd\nwww.eTender.bd\nwww.zmart.bd'
+                    }
                     className="mt-1 w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder-slate-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/40"
                   />
                 </div>

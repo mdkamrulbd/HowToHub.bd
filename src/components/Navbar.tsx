@@ -15,7 +15,7 @@ export default function Navbar() {
     { name: 'টিউটোরিয়াল', href: '/#tutorials' },
     { name: 'ভিডিও', href: 'https://www.youtube.com/@HowToHub-BD' },
     { name: 'আমাদের সম্পর্কে', href: '/about' },
-    { name: 'যোগাযোগ', href: '/contact' },
+    { name: 'সহায়তা কেন্দ্র', href: '/contact' },
   ])
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [query, setQuery] = useState('')

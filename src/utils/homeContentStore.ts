@@ -32,6 +32,7 @@ export type HomeContent = {
   subscribe_subtitle?: string | null
   footer_title?: string | null
   footer_description?: string | null
+  footer_websites?: string[] | null
   footer_email?: string | null
   footer_address?: string | null
   footer_credit?: string | null

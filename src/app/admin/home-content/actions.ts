@@ -44,6 +44,14 @@ export async function updateHomeContent(formData: FormData) {
             })
             .filter((v): v is { label: string; href: string } => v !== null)
         : null
+    const footerWebsitesRaw = String(formData.get('footer_websites') || '').trim()
+    const footer_websites =
+      footerWebsitesRaw.length > 0
+        ? footerWebsitesRaw
+            .split('\n')
+            .map((line) => line.trim())
+            .filter((line) => line.length > 0)
+        : null
     const social_links = {
       facebook: clean(formData.get('social_facebook')),
       youtube: clean(formData.get('social_youtube')),
@@ -80,8 +88,9 @@ export async function updateHomeContent(formData: FormData) {
       subscribe_subtitle: clean(formData.get('subscribe_subtitle')),
       footer_title: clean(formData.get('footer_title')),
       footer_description: clean(formData.get('footer_description')),
-      footer_email: clean(formData.get('footer_email')),
-      footer_address: clean(formData.get('footer_address')),
+      footer_websites,
+      footer_email: null,
+      footer_address: null,
       footer_credit: clean(formData.get('footer_credit')),
       quick_links,
       social_links,

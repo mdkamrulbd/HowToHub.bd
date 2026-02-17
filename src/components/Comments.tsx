@@ -17,11 +17,119 @@ interface Comment {
   is_admin_reply?: boolean
 }
 
-export default function Comments({ postId, initialComments }: { postId: string, initialComments: Comment[] }) {
-  // Organize comments into threads
-  const rootComments = initialComments.filter(c => !c.parent_id)
-  const replies = initialComments.filter(c => c.parent_id)
+function CommentForm({
+  parentId,
+  isReply = false,
+  name,
+  email,
+  content,
+  error,
+  isSubmitting,
+  onSubmit,
+  onCancelReply,
+  setName,
+  setEmail,
+  setContent,
+}: {
+  parentId?: string
+  isReply?: boolean
+  name: string
+  email: string
+  content: string
+  error: string | null
+  isSubmitting: boolean
+  onSubmit: (e: React.FormEvent) => void
+  onCancelReply?: () => void
+  setName: React.Dispatch<React.SetStateAction<string>>
+  setEmail: React.Dispatch<React.SetStateAction<string>>
+  setContent: React.Dispatch<React.SetStateAction<string>>
+}) {
+  return (
+    <form onSubmit={onSubmit} className={`space-y-4 ${isReply ? 'mt-4 ml-8' : ''}`}>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label htmlFor={`name-${parentId || 'root'}`} className="block text-sm font-medium text-slate-300 mb-1">
+            আপনার নাম
+          </label>
+          <input
+            type="text"
+            id={`name-${parentId || 'root'}`}
+            required
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 transition-all"
+            placeholder="নাম লিখুন"
+          />
+        </div>
+        <div>
+          <label htmlFor={`email-${parentId || 'root'}`} className="block text-sm font-medium text-slate-300 mb-1">
+            ইমেইল (প্রকাশিত হবে না)
+          </label>
+          <input
+            type="email"
+            id={`email-${parentId || 'root'}`}
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 transition-all"
+            placeholder="example@email.com"
+          />
+        </div>
+      </div>
+      <div>
+        <label htmlFor={`content-${parentId || 'root'}`} className="block text-sm font-medium text-slate-300 mb-1">
+          আপনার মন্তব্য
+        </label>
+        <textarea
+          id={`content-${parentId || 'root'}`}
+          required
+          rows={3}
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+          className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 transition-all resize-none"
+          placeholder="এখানে লিখুন..."
+        />
+      </div>
 
+      {error && (
+        <div className="text-red-400 text-sm bg-red-500/10 px-4 py-2 rounded-lg border border-red-500/20">
+          {error}
+        </div>
+      )}
+
+      <div className="flex justify-end gap-2">
+        {isReply && (
+          <button
+            type="button"
+            onClick={onCancelReply}
+            className="px-4 py-2 rounded-xl border border-white/10 text-slate-300 hover:bg-white/5 text-sm font-medium transition"
+          >
+            বাতিল
+          </button>
+        )}
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="inline-flex items-center justify-center rounded-xl bg-indigo-600 px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/30 hover:bg-indigo-500 hover:shadow-indigo-500/40 transition-all disabled:opacity-50 disabled:cursor-not-allowed gap-2"
+        >
+          {isSubmitting ? (
+            <>
+              <span className="h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+              পাঠানো হচ্ছে...
+            </>
+          ) : (
+            <>
+              <Send className="h-4 w-4" />
+              {isReply ? 'রিপ্লাই দিন' : 'মন্তব্য করুন'}
+            </>
+          )}
+        </button>
+      </div>
+    </form>
+  )
+}
+
+export default function Comments({ postId, initialComments }: { postId: string, initialComments: Comment[] }) {
   const [comments, setComments] = useState<Comment[]>(initialComments)
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -83,7 +191,7 @@ export default function Comments({ postId, initialComments }: { postId: string, 
 
       if (error) throw error
 
-      setComments([data, ...comments])
+      setComments((prev) => [data, ...prev])
       window.localStorage.setItem('comment_email', email)
       setSavedEmail(email)
       setName('')
@@ -125,90 +233,6 @@ export default function Comments({ postId, initialComments }: { postId: string, 
     }
   }
 
-  const CommentForm = ({ parentId, isReply = false }: { parentId?: string, isReply?: boolean }) => (
-    <form onSubmit={(e) => handleSubmit(e, parentId)} className={`space-y-4 ${isReply ? 'mt-4 ml-8' : ''}`}>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div>
-          <label htmlFor={`name-${parentId || 'root'}`} className="block text-sm font-medium text-slate-300 mb-1">
-            আপনার নাম
-          </label>
-          <input
-            type="text"
-            id={`name-${parentId || 'root'}`}
-            required
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 transition-all"
-            placeholder="নাম লিখুন"
-          />
-        </div>
-        <div>
-          <label htmlFor={`email-${parentId || 'root'}`} className="block text-sm font-medium text-slate-300 mb-1">
-            ইমেইল (প্রকাশিত হবে না)
-          </label>
-          <input
-            type="email"
-            id={`email-${parentId || 'root'}`}
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 transition-all"
-            placeholder="example@email.com"
-          />
-        </div>
-      </div>
-      <div>
-        <label htmlFor={`content-${parentId || 'root'}`} className="block text-sm font-medium text-slate-300 mb-1">
-          আপনার মন্তব্য
-        </label>
-        <textarea
-          id={`content-${parentId || 'root'}`}
-          required
-          rows={3}
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 transition-all resize-none"
-          placeholder="এখানে লিখুন..."
-        />
-      </div>
-      
-      {error && (
-        <div className="text-red-400 text-sm bg-red-500/10 px-4 py-2 rounded-lg border border-red-500/20">
-          {error}
-        </div>
-      )}
-
-      <div className="flex justify-end gap-2">
-        {isReply && (
-          <button
-            type="button"
-            onClick={() => setReplyingTo(null)}
-            className="px-4 py-2 rounded-xl border border-white/10 text-slate-300 hover:bg-white/5 text-sm font-medium transition"
-          >
-            বাতিল
-          </button>
-        )}
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className="inline-flex items-center justify-center rounded-xl bg-indigo-600 px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/30 hover:bg-indigo-500 hover:shadow-indigo-500/40 transition-all disabled:opacity-50 disabled:cursor-not-allowed gap-2"
-        >
-          {isSubmitting ? (
-            <>
-              <span className="h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-              পাঠানো হচ্ছে...
-            </>
-          ) : (
-            <>
-              <Send className="h-4 w-4" />
-              {isReply ? 'রিপ্লাই দিন' : 'মন্তব্য করুন'}
-            </>
-          )}
-        </button>
-      </div>
-    </form>
-  )
-
   const DateText = ({ iso }: { iso: string }) => {
     const [text, setText] = useState('')
     useEffect(() => {
@@ -224,6 +248,9 @@ export default function Comments({ postId, initialComments }: { postId: string, 
     return <span suppressHydrationWarning className="text-xs text-slate-400 whitespace-nowrap">{text}</span>
   }
 
+  const rootComments = comments.filter((c) => !c.parent_id)
+  const replies = comments.filter((c) => c.parent_id)
+
   return (
     <div className="mt-12 space-y-8">
       <div className="flex items-center gap-3 mb-6">
@@ -233,7 +260,17 @@ export default function Comments({ postId, initialComments }: { postId: string, 
 
       {/* Main Comment Form */}
       <div className="surface rounded-2xl p-6 border border-white/10 bg-slate-900/50">
-        <CommentForm />
+        <CommentForm
+          name={name}
+          email={email}
+          content={content}
+          error={error}
+          isSubmitting={isSubmitting}
+          onSubmit={(e) => handleSubmit(e)}
+          setName={setName}
+          setEmail={setEmail}
+          setContent={setContent}
+        />
       </div>
 
       {/* Comments List */}
@@ -284,7 +321,20 @@ export default function Comments({ postId, initialComments }: { postId: string, 
 
                   {/* Reply Form */}
                   {replyingTo === comment.id && (
-                    <CommentForm parentId={comment.id} isReply={true} />
+                    <CommentForm
+                      parentId={comment.id}
+                      isReply={true}
+                      name={name}
+                      email={email}
+                      content={content}
+                      error={error}
+                      isSubmitting={isSubmitting}
+                      onSubmit={(e) => handleSubmit(e, comment.id)}
+                      onCancelReply={() => setReplyingTo(null)}
+                      setName={setName}
+                      setEmail={setEmail}
+                      setContent={setContent}
+                    />
                   )}
 
                   {/* Nested Replies */}
