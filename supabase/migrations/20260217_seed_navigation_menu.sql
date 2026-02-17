@@ -6,7 +6,7 @@ begin
     values
       ('হোম', '/', 0, true),
       ('টিউটোরিয়াল', '/#tutorials', 1, true),
-      ('ভিডিও', 'https://youtube.com', 2, true),
+      ('ভিডিও', 'https://www.youtube.com/@HowToHub-BD', 2, true),
       ('আমাদের সম্পর্কে', '/about', 3, true),
       ('যোগাযোগ', '/contact', 4, true);
   end if;

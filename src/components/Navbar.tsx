@@ -13,7 +13,7 @@ export default function Navbar() {
   const [navItems, setNavItems] = useState<NavItem[]>([
     { name: 'হোম', href: '/' },
     { name: 'টিউটোরিয়াল', href: '/#tutorials' },
-    { name: 'ভিডিও', href: 'https://youtube.com' },
+    { name: 'ভিডিও', href: 'https://www.youtube.com/@HowToHub-BD' },
     { name: 'আমাদের সম্পর্কে', href: '/about' },
     { name: 'যোগাযোগ', href: '/contact' },
   ])

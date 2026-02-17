@@ -1,6 +1,7 @@
 import { readHomeContent } from '@/utils/homeContentStore'
 import { updateHomeContent } from './actions'
 import { Save } from 'lucide-react'
+import ConfirmSubmit from '@/components/ConfirmSubmit'
 
 export default async function HomeContentPage() {
   const contentData = await readHomeContent()
@@ -14,7 +15,7 @@ export default async function HomeContentPage() {
     primary_cta_label: 'টিউটোরিয়াল দেখুন',
     primary_cta_href: '/#tutorials',
     secondary_cta_label: 'ভিডিও দেখুন',
-    secondary_cta_href: 'https://youtube.com',
+    secondary_cta_href: 'https://www.youtube.com/@HowToHub-BD',
     feature_panel_title: 'আপনার দরকারি টেক সলিউশন',
     feature_panel_badge: 'ইমেইলে আপডেট নিন',
     feature_one_title: 'টেক সমস্যা সমাধান',
@@ -39,7 +40,7 @@ export default async function HomeContentPage() {
     footer_credit: 'HowToHub.bd. সর্বস্বত্ব সংরক্ষিত।',
     social_links: {
       facebook: 'https://facebook.com',
-      youtube: 'https://youtube.com',
+      youtube: 'https://www.youtube.com/@HowToHub-BD',
       x: 'https://x.com',
       instagram: 'https://instagram.com',
     },
@@ -71,7 +72,7 @@ export default async function HomeContentPage() {
           <p className="mt-1 text-sm text-slate-300">হোম পেইজের সকল স্ট্যাটিক কনটেন্ট আপডেট করুন।</p>
         </div>
         <div className="border-t border-white/10 px-4 py-5 sm:p-6">
-          <form action={updateHomeContent} className="space-y-8">
+          <form id="home-content-form" action={updateHomeContent} className="space-y-8">
             <div className="space-y-4">
               <h4 className="text-base font-semibold text-white">Hero</h4>
               <div>
@@ -374,7 +375,7 @@ export default async function HomeContentPage() {
                   <input
                     id="social_youtube"
                     name="social_youtube"
-                    defaultValue={content.social_links?.youtube ?? 'https://youtube.com'}
+                    defaultValue={content.social_links?.youtube ?? 'https://www.youtube.com/@HowToHub-BD'}
                     className="mt-1 w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder-slate-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/40"
                   />
                 </div>
@@ -453,13 +454,15 @@ export default async function HomeContentPage() {
             </div>
 
             <div className="flex justify-end">
-              <button
-                type="submit"
+              <ConfirmSubmit
+                formId="home-content-form"
+                label="Save Changes"
+                confirmTitle="পরিবর্তন নিশ্চিত?"
+                confirmMessage="এই পরিবর্তনগুলো সেভ করতে চান?"
+                confirmLabel="হ্যাঁ, সেভ করুন"
+                cancelLabel="বাতিল"
                 className="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-indigo-500 via-sky-500 to-fuchsia-500 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/30 hover:opacity-90 transition"
-              >
-                <Save className="h-4 w-4 mr-2" />
-                Save Changes
-              </button>
+              />
             </div>
           </form>
         </div>
