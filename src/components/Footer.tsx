@@ -10,6 +10,7 @@ export default async function Footer() {
   const footerEmail = content?.footer_email ?? 'contact@howtohub.bd'
   const footerAddress = content?.footer_address ?? 'ঢাকা, বাংলাদেশ'
   const footerCredit = content?.footer_credit ?? 'HowToHub.bd. সর্বস্বত্ব সংরক্ষিত।'
+  const links = content?.social_links ?? {}
 
   return (
     <footer className="solid-bar border-t border-white/10 mt-auto">
@@ -21,22 +22,30 @@ export default async function Footer() {
               {footerDescription}
             </p>
             <div className="flex space-x-4">
-              <Link href={content.social_links?.facebook ?? 'https://facebook.com'} className="chip p-2 rounded-full hover:bg-white/10 transition-colors text-slate-200">
-                <span className="sr-only">ফেসবুক</span>
-                <Facebook className="h-5 w-5" />
-              </Link>
-              <Link href={content.social_links?.youtube ?? 'https://youtube.com'} className="chip p-2 rounded-full hover:bg-white/10 transition-colors text-slate-200">
-                <span className="sr-only">ইউটিউব</span>
-                <Youtube className="h-5 w-5" />
-              </Link>
-              <Link href={content.social_links?.x ?? 'https://x.com'} className="chip p-2 rounded-full hover:bg-white/10 transition-colors text-slate-200">
-                <span className="sr-only">এক্স</span>
-                <Twitter className="h-5 w-5" />
-              </Link>
-              <Link href={content.social_links?.instagram ?? 'https://instagram.com'} className="chip p-2 rounded-full hover:bg-white/10 transition-colors text-slate-200">
-                <span className="sr-only">ইনস্টাগ্রাম</span>
-                <Instagram className="h-5 w-5" />
-              </Link>
+              {links.facebook ? (
+                <Link href={links.facebook} className="chip p-2 rounded-full hover:bg-white/10 transition-colors text-slate-200">
+                  <span className="sr-only">ফেসবুক</span>
+                  <Facebook className="h-5 w-5" />
+                </Link>
+              ) : null}
+              {links.youtube ? (
+                <Link href={links.youtube} className="chip p-2 rounded-full hover:bg-white/10 transition-colors text-slate-200">
+                  <span className="sr-only">ইউটিউব</span>
+                  <Youtube className="h-5 w-5" />
+                </Link>
+              ) : null}
+              {links.x ? (
+                <Link href={links.x} className="chip p-2 rounded-full hover:bg-white/10 transition-colors text-slate-200">
+                  <span className="sr-only">এক্স</span>
+                  <Twitter className="h-5 w-5" />
+                </Link>
+              ) : null}
+              {links.instagram ? (
+                <Link href={links.instagram} className="chip p-2 rounded-full hover:bg-white/10 transition-colors text-slate-200">
+                  <span className="sr-only">ইনস্টাগ্রাম</span>
+                  <Instagram className="h-5 w-5" />
+                </Link>
+              ) : null}
             </div>
           </div>
 

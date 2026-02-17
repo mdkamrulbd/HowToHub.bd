@@ -8,8 +8,8 @@ export default async function HomeContentPage() {
   const defaultContent = {
     hero_badge: 'টেকনোলজি সমস্যার স্মার্ট সমাধান',
     hero_title_prefix: 'বাংলাদেশের',
-    hero_title_accent: 'স্মার্ট টিউটোরিয়াল',
-    hero_title_suffix: ' হাব',
+    hero_title_accent: 'স্মার্ট টিউটোরিয়াল হাব',
+    hero_title_suffix: '',
     hero_description: 'HowToHub.bd তে পাবেন টেকনোলজি, স্মার্টফোন ও কম্পিউটার সফটওয়্যারের সমস্যা সমাধান, দরকারি টিপস-ট্রিকস, আর ইমেইলে পাঠানো সমস্যার সমাধানভিত্তিক পোস্ট ও ভিডিও—সবই বাংলাদেশের স্মার্ট টিউটোরিয়াল হাবে।',
     primary_cta_label: 'টিউটোরিয়াল দেখুন',
     primary_cta_href: '/#tutorials',

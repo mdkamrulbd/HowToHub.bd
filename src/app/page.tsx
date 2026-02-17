@@ -4,6 +4,7 @@ import TutorialListCard from '@/components/TutorialListCard'
 import CategoryList from '@/components/CategoryList'
 import SubscribeForm from '@/components/SubscribeForm'
 import { createClient } from '@/utils/supabase/server'
+import { readHomeContent } from '@/utils/homeContentStore'
 import { getDeterministicRandom } from '@/utils/random'
 import { ShieldCheck, Sparkles, TrendingUp } from 'lucide-react'
 import Link from 'next/link'
@@ -155,12 +156,14 @@ export default async function Home({
     .select('*')
     .eq('key', 'default')
     .single()
+  
+  const fileContent = await readHomeContent()
 
   const defaultContent = {
     hero_badge: 'টেকনোলজি সমস্যার স্মার্ট সমাধান',
     hero_title_prefix: 'বাংলাদেশের',
-    hero_title_accent: 'স্মার্ট টিউটোরিয়াল',
-    hero_title_suffix: ' হাব',
+    hero_title_accent: 'স্মার্ট টিউটোরিয়াল হাব',
+    hero_title_suffix: '',
     hero_description: 'HowToHub.bd তে পাবেন টেকনোলজি, স্মার্টফোন ও কম্পিউটার সফটওয়্যারের সমস্যা সমাধান, দরকারি টিপস-ট্রিকস, আর ইমেইলে পাঠানো সমস্যার সমাধানভিত্তিক পোস্ট ও ভিডিও—সবই বাংলাদেশের স্মার্ট টিউটোরিয়াল হাবে।',
     primary_cta_label: 'টিউটোরিয়াল দেখুন',
     primary_cta_href: '/#tutorials',
@@ -188,6 +191,7 @@ export default async function Home({
   const content = {
     ...defaultContent,
     ...(contentData ?? {}),
+    ...(fileContent ?? {}),
   }
 
   const categories = availableCategories.length > 0 ? availableCategories : (
@@ -213,18 +217,22 @@ export default async function Home({
               {content.hero_description}
             </div>
             <div className="mt-8 flex flex-wrap gap-4">
-              <Link
-                href={content.primary_cta_href}
-                className="px-6 py-3 rounded-full bg-white text-slate-900 font-semibold shadow-lg shadow-indigo-500/30"
-              >
-                {content.primary_cta_label}
-              </Link>
-              <Link
-                href={content.secondary_cta_href}
-                className="px-6 py-3 rounded-full border border-white/20 text-white font-semibold hover:bg-white/10"
-              >
-                {content.secondary_cta_label}
-              </Link>
+              {content.primary_cta_label && content.primary_cta_href ? (
+                <Link
+                  href={content.primary_cta_href}
+                  className="px-6 py-3 rounded-full bg-white text-slate-900 font-semibold shadow-lg shadow-indigo-500/30"
+                >
+                  {content.primary_cta_label}
+                </Link>
+              ) : null}
+              {content.secondary_cta_label && content.secondary_cta_href ? (
+                <Link
+                  href={content.secondary_cta_href}
+                  className="px-6 py-3 rounded-full border border-white/20 text-white font-semibold hover:bg-white/10"
+                >
+                  {content.secondary_cta_label}
+                </Link>
+              ) : null}
             </div>
           </div>
 
