@@ -193,6 +193,17 @@ export default async function Home({
     ...(contentData ?? {}),
     ...(fileContent ?? {}),
   }
+  
+  const normalizeUrl = (url?: string | null) => {
+    if (!url) return ''
+    const u = url.trim()
+    if (!u) return ''
+    if (u.startsWith('/')) return u
+    if (/^https?:\/\//i.test(u)) return u
+    return `https://${u}`
+  }
+  const primaryHref = normalizeUrl(content.primary_cta_href)
+  const secondaryHref = normalizeUrl(content.secondary_cta_href)
 
   const categories = availableCategories.length > 0 ? availableCategories : (
     Array.isArray(content.categories) && content.categories.length > 0
@@ -217,21 +228,43 @@ export default async function Home({
               {content.hero_description}
             </div>
             <div className="mt-8 flex flex-wrap gap-4">
-              {content.primary_cta_label && content.primary_cta_href ? (
-                <Link
-                  href={content.primary_cta_href}
-                  className="px-6 py-3 rounded-full bg-white text-slate-900 font-semibold shadow-lg shadow-indigo-500/30"
-                >
-                  {content.primary_cta_label}
-                </Link>
+              {content.primary_cta_label && primaryHref ? (
+                /^https?:\/\//i.test(primaryHref) ? (
+                  <a
+                    href={primaryHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-6 py-3 rounded-full bg-white text-slate-900 font-semibold shadow-lg shadow-indigo-500/30"
+                  >
+                    {content.primary_cta_label}
+                  </a>
+                ) : (
+                  <Link
+                    href={primaryHref}
+                    className="px-6 py-3 rounded-full bg-white text-slate-900 font-semibold shadow-lg shadow-indigo-500/30"
+                  >
+                    {content.primary_cta_label}
+                  </Link>
+                )
               ) : null}
-              {content.secondary_cta_label && content.secondary_cta_href ? (
-                <Link
-                  href={content.secondary_cta_href}
-                  className="px-6 py-3 rounded-full border border-white/20 text-white font-semibold hover:bg-white/10"
-                >
-                  {content.secondary_cta_label}
-                </Link>
+              {content.secondary_cta_label && secondaryHref ? (
+                /^https?:\/\//i.test(secondaryHref) ? (
+                  <a
+                    href={secondaryHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-6 py-3 rounded-full border border-white/20 text-white font-semibold hover:bg-white/10"
+                  >
+                    {content.secondary_cta_label}
+                  </a>
+                ) : (
+                  <Link
+                    href={secondaryHref}
+                    className="px-6 py-3 rounded-full border border-white/20 text-white font-semibold hover:bg-white/10"
+                  >
+                    {content.secondary_cta_label}
+                  </Link>
+                )
               ) : null}
             </div>
           </div>
