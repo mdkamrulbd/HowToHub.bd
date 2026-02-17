@@ -3,6 +3,7 @@
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { writeHomeContent } from '@/utils/homeContentStore'
+import { createClient } from '@/utils/supabase/server'
 
 const clean = (value: FormDataEntryValue | null) => {
   if (!value) return null
@@ -10,8 +11,21 @@ const clean = (value: FormDataEntryValue | null) => {
   return trimmed.length ? trimmed : null
 }
 
+const ensureAccess = async (supabase: Awaited<ReturnType<typeof createClient>>) => {
+  const { data: { user }, error } = await supabase.auth.getUser()
+  if (error || !user) {
+    throw new Error('Unauthorized')
+  }
+  const role = user.user_metadata?.role as string | undefined
+  if (role && role !== 'admin' && role !== 'manager') {
+    throw new Error('Unauthorized')
+  }
+}
+
 export async function updateHomeContent(formData: FormData) {
   try {
+    const supabase = await createClient()
+    await ensureAccess(supabase)
     const categoriesValue = clean(formData.get('categories'))
     const categories = categoriesValue
       ? categoriesValue.split(',').map((item) => item.trim()).filter((item) => item.length > 0)
@@ -37,7 +51,7 @@ export async function updateHomeContent(formData: FormData) {
       instagram: clean(formData.get('social_instagram')),
     }
 
-    await writeHomeContent({
+    const payload = {
       hero_badge: clean(formData.get('hero_badge')),
       hero_title_prefix: clean(formData.get('hero_title_prefix')),
       hero_title_accent: clean(formData.get('hero_title_accent')),
@@ -71,7 +85,44 @@ export async function updateHomeContent(formData: FormData) {
       footer_credit: clean(formData.get('footer_credit')),
       quick_links,
       social_links,
-    })
+    }
+
+    await writeHomeContent(payload)
+
+    const dbPayload = {
+      key: 'default',
+      hero_badge: payload.hero_badge,
+      hero_title_prefix: payload.hero_title_prefix,
+      hero_title_accent: payload.hero_title_accent,
+      hero_title_suffix: payload.hero_title_suffix,
+      hero_description: payload.hero_description,
+      primary_cta_label: payload.primary_cta_label,
+      primary_cta_href: payload.primary_cta_href,
+      secondary_cta_label: payload.secondary_cta_label,
+      secondary_cta_href: payload.secondary_cta_href,
+      feature_panel_title: payload.feature_panel_title,
+      feature_panel_badge: payload.feature_panel_badge,
+      feature_one_title: payload.feature_one_title,
+      feature_one_description: payload.feature_one_description,
+      feature_two_title: payload.feature_two_title,
+      feature_two_description: payload.feature_two_description,
+      feature_three_title: payload.feature_three_title,
+      feature_three_description: payload.feature_three_description,
+      categories,
+      tutorials_title: payload.tutorials_title,
+      tutorials_subtitle: payload.tutorials_subtitle,
+      tutorials_search_placeholder: payload.tutorials_search_placeholder,
+      empty_posts_message: payload.empty_posts_message,
+      subscribe_title: payload.subscribe_title,
+      subscribe_subtitle: payload.subscribe_subtitle,
+    }
+
+    const { error } = await supabase
+      .from('home_content')
+      .upsert(dbPayload, { onConflict: 'key' })
+    if (error) {
+      throw new Error('হোম কনটেন্ট ডাটাবেসে সেভ করা যায়নি।')
+    }
 
     revalidatePath('/')
     revalidatePath('/admin/home-content')
